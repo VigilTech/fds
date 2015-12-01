@@ -1,9 +1,7 @@
 package fds.CRDT;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 
 public class GCounter {
@@ -21,14 +19,17 @@ public class GCounter {
 
     public long value() {
         // TODO
+        return 0L;
     }
 
     public GCounter merge(GCounter that) {
         // TODO
+        return new GCounter();
     }
 
     public String toJson() {
         // TODO
+        return "";
     }
 
     private long valOrZero(Long l) {
@@ -38,11 +39,13 @@ public class GCounter {
 
 
     public static void main(String[] args) {
-        Set<String> nodes = new HashSet<String>();
 
-        GCounter a = new GCounter().inc("a");
-        GCounter b = new GCounter().inc("b");
-        GCounter c = new GCounter().inc("c");
+        GCounter a = new GCounter();
+        a.inc("a",3);
+        GCounter b = new GCounter();
+        b.inc("b",7);
+        GCounter c = new GCounter();
+        c.inc("c",4);
 
     }
 
