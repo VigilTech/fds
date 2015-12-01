@@ -25,7 +25,7 @@ public class MovieDBClient {
         System.out.println( getDetailsById( ids.get(0) ) );
 
     }
-    
+
     public static List<String> getPopularMovieIDs( ) throws Exception {
         String pop = "movie/popular";
         String json =  httpGet(base + pop + key);
