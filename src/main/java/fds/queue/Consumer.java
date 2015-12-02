@@ -15,6 +15,7 @@ import java.util.Scanner;
  */
 public class Consumer {
 
+
     public static void main(String[] args) throws Exception {
 
         Connection con = ConnectionFactory.connect("192.168.99.100");
@@ -22,8 +23,7 @@ public class Consumer {
         ReadChannel rc = con.subscribe("BBC7");
         System.out.println(rc.read());
 
-        // TODO
-        // Read from the channel until the finish signal
+        // TODO - Read from the channel until the finish signal
 	}
 
 
