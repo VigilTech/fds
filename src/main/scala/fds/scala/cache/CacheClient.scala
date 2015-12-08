@@ -1,4 +1,4 @@
-package fdsys.cache
+package fds.scala.cache
 
 import com.zink.cache.{CacheFactory, Cache}
 

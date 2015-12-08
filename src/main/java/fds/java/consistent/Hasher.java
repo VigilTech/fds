@@ -1,4 +1,4 @@
-package fds.consistent;
+package fds.java.consistent;
 
 /**
  * Helper Class to lock Hash Algo String to simple method names

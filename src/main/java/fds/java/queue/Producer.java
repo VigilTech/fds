@@ -1,4 +1,4 @@
-package fds.queue;
+package fds.java.queue;
 
 
 import com.zink.queue.*;

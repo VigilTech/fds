@@ -1,4 +1,4 @@
-package fds.cache;
+package fds.java.cache;
 
 /**
  * Example Client for Movie DB

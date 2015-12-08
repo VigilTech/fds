@@ -1,4 +1,4 @@
-package fdsys.cache
+package fds.scala.cache
 
 /**
   * Stub for Movie Cache

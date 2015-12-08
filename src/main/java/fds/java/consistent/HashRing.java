@@ -1,4 +1,4 @@
-package fds.consistent;
+package fds.java.consistent;
 
 /**
  * Stub for a Consistent hash ring

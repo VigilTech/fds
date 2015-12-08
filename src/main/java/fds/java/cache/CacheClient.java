@@ -1,4 +1,4 @@
-package fds.cache;
+package fds.java.cache;
 
 /**
  * Created by nigel on 01/12/2015.

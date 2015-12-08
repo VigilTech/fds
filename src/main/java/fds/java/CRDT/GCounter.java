@@ -1,4 +1,4 @@
-package fds.CRDT;
+package fds.java.CRDT;
 
 import java.util.HashMap;
 import java.util.Map;

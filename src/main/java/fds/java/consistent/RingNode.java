@@ -1,4 +1,4 @@
-package fds.consistent;
+package fds.java.consistent;
 
 /**
  * Most simple local representation of a node on teh Ring

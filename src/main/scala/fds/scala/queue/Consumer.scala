@@ -1,4 +1,4 @@
-package fdsys.queue
+package fds.scala.queue
 
 import com.zink.queue.{ReadChannel, ConnectionFactory, Connection}
 

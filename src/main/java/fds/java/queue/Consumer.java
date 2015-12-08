@@ -1,13 +1,9 @@
-package fds.queue;
+package fds.java.queue;
 
 
 import com.zink.queue.Connection;
 import com.zink.queue.ConnectionFactory;
 import com.zink.queue.ReadChannel;
-import com.zink.queue.WriteChannel;
-
-import java.io.FileInputStream;
-import java.util.Scanner;
 
 
 /**

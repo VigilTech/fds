@@ -1,4 +1,4 @@
-package fdsys.cache
+package fds.scala.cache
 
 import java.net.{URL, URLConnection}
 import java.util.Scanner

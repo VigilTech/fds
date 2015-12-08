@@ -1,4 +1,4 @@
-package fds.space;
+package fds.java.space;
 
 /**
  * Created by nigel on 01/12/2015.
