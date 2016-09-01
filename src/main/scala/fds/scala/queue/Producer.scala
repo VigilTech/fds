@@ -18,6 +18,6 @@ object Producer extends App {
 
   // TODO use logLines to write each line onto the channel
 
-  // TODO write an end of stream marker\
+  // TODO write an end of stream marker
 
 }

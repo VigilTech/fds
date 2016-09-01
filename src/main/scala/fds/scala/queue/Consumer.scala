@@ -3,7 +3,7 @@ package fds.scala.queue
 import com.zink.queue.{ReadChannel, ConnectionFactory, Connection}
 
 /**
-  * Stub Consumer
+  *  Consumer Stub
   */
 object Consumer extends App {
 

@@ -6,7 +6,7 @@ import java.util.Scanner
 /**
   *
   */
-object  MovieDBClient extends App {
+object MovieDBClient extends App {
 
   private[cache] val base: String = "https://api.themoviedb.org/3/"
   private[cache] val key: String = "?api_key=???"
@@ -33,7 +33,7 @@ object  MovieDBClient extends App {
     }
   }
 
-  def getDetailsById(id: String): String = {
+  def getDetailsById(id: String) : String = {
     val movie: String = "movie/"
     return httpGet(base + movie + id + key)
   }
