@@ -1,2 +1,2 @@
-# fds-project
-Fundamentals of Distributed System - Workshop Project Material
+# Fundamentals of Distributed System
+Workshop Project Material
