@@ -1,8 +1,8 @@
 name := "Distributed Systems Workshop Examples"
 
-version := "0.2"
+version := "1.3"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.7"
 
 cancelable in Global := true
 
