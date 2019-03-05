@@ -9,11 +9,24 @@ import java.util.Scanner;
 
 /**
  * Stub for the Producer of information to queue
+ *
+ * From Fly Docker
+ *
+ * > docker run -p 4396:4396 zink/fly
+ *
+ * To find container <run time name>
+ * > docker ps
+ *
+ * To find ipAddress
+ * > docker inspect <run time name> | grep -i ipaddress
+ *
  */
 public class Producer {
 
     public static void main(String[] args) throws Exception {
 
+
+        final 
         Connection con = ConnectionFactory.connect("192.168.99.100");
 
         WriteChannel wc = con.publish("BBC7");

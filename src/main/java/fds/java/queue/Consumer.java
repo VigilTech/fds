@@ -7,7 +7,7 @@ import com.zink.queue.ReadChannel;
 
 
 /**
- * Stub for the Producer of information to queue
+ * Stub for the Consumer of information from queue
  */
 public class Consumer {
 

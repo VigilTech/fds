@@ -8,3 +8,4 @@ cancelable in Global := true
 
 libraryDependencies += "com.flyobjectspace" % "flyjava" % "2.0.4"
 
+libraryDependencies += "io.nats" % "java-nats-streaming" % "2.1.0"
