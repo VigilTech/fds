@@ -25,11 +25,10 @@ public class Producer {
 
     public static void main(String[] args) throws Exception {
 
-
-        final 
-        Connection con = ConnectionFactory.connect("192.168.99.100");
-
+        final String ipAddr = "192.168.1.84";
+        Connection con = ConnectionFactory.connect(ipAddr);
         WriteChannel wc = con.publish("BBC7");
+
         wc.write("Hello Consumer");
 
         /* Read a file from the local file system line by line */

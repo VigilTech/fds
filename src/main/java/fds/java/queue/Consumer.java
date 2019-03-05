@@ -14,7 +14,8 @@ public class Consumer {
 
     public static void main(String[] args) throws Exception {
 
-        Connection con = ConnectionFactory.connect("192.168.99.100");
+        final String ipAddr = "192.168.1.84";
+        Connection con = ConnectionFactory.connect(ipAddr);
 
         ReadChannel rc = con.subscribe("BBC7");
         System.out.println(rc.read());

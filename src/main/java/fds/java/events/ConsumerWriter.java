@@ -8,11 +8,8 @@ import io.nats.streaming.StreamingConnection;
 import io.nats.streaming.StreamingConnectionFactory;
 
 
-
-
 /**
- * Stub for the Consumer of information from the  queue and into the event store
- *
+ * Stub for the Consumer of information from the Queue and writer into the event store
  *
  * The following condensed from Docker
  *
@@ -32,7 +29,8 @@ public class ConsumerWriter {
     public static void main(String[] args) throws Exception {
 
         // Connect to queue
-        final Connection con = ConnectionFactory.connect("172.17.0.2");
+        final String ipAddr = "192.168.1.84";
+        final Connection con = ConnectionFactory.connect(ipAddr);
         final String channelName = "BBC7";
         final ReadChannel rc = con.subscribe(channelName);
 
