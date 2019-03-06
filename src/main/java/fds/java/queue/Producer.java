@@ -14,12 +14,8 @@ import java.util.Scanner;
  *
  * > docker run -p 4396:4396 zink/fly
  *
- * To find container <run time name>
+ * To check it is running
  * > docker ps
- *
- * To find ipAddress
- * > docker inspect <run time name> | grep -i ipaddress
- *
  */
 public class Producer {
 

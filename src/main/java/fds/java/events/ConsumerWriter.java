@@ -20,7 +20,10 @@ import io.nats.streaming.StreamingConnectionFactory;
  * > docker run -d -p 4222:4222 -p 8222:8222 nats-streaming nats-streaming-server -p 4222 -m 8222
  *
  *  And on Unix
- *  > docker run -d -p 4222:4222 -p 8222:8222 nats-streaming -p 4222 -m 8222
+ * > docker run -d -p 4222:4222 -p 8222:8222 nats-streaming -p 4222 -m 8222
+ *
+ * To check it is running
+ * > docker ps
  *
  */
 public class ConsumerWriter {
