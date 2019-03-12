@@ -9,7 +9,7 @@ import io.nats.streaming.StreamingConnectionFactory;
 
 
 /**
- * Stub for the Consumer of information from the Queue and writer into the event store
+ * Stub for the Consumer of information from the Queue and writer into the Nats EventStore
  *
  * The following condensed from Docker
  *
@@ -51,7 +51,8 @@ public class ConsumerWriter {
         final String event = (String) rc.read();
 
         // to write an item to the event store
-        sc.publish(channelName, event.getBytes());
+        final String subject = "BBC7";
+        sc.publish(subject, event.getBytes());
 	}
 
 

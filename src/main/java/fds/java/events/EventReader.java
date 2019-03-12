@@ -1,58 +1,62 @@
 package fds.java.events;
 
-
-import com.zink.queue.Connection;
-import com.zink.queue.ConnectionFactory;
-import com.zink.queue.ReadChannel;
 import io.nats.streaming.StreamingConnection;
 import io.nats.streaming.StreamingConnectionFactory;
+import io.nats.streaming.SubscriptionOptions;
+
+import java.util.*;
+import java.util.concurrent.CountDownLatch;
 
 
 /**
- * Stub for the Consumer of information from the Queue and writer into the Nats EventStore
- *
- * The following condensed from Docker
- *
- * To Pull Nats server from Docker
- * > docker pull nats-streaming
- *
- * Then to run on Windows
- * > docker run -d -p 4222:4222 -p 8222:8222 nats-streaming nats-streaming-server -p 4222 -m 8222
- *
- *  And on Unix
- * > docker run -d -p 4222:4222 -p 8222:8222 nats-streaming -p 4222 -m 8222
- *
- * To check it is running
- * > docker ps
- *
+ * Stub for the Event Reader of the Nats EventStore
  */
-public class ConsumerWriter {
+public class EventReader {
 
+    final static Map<String,Integer> document = new HashMap<>();
+
+    final static Set<String> targets= new HashSet<String>(
+                                Arrays.asList(  "AdultSki",
+                                                "WinterActivities",
+                                                "DanielBaudSkiGuide")
+                                );
+
+    final static void register(final String logLine) {
+        targets.forEach( ( target ) -> {
+            if ( logLine.contains((target)) )
+                document.compute(target, (k, v) -> (v == null) ? 1 : v + 1);
+        });
+    }
+
+    final static void showDoc ( ) {
+        document.forEach ( (k,v) -> System.out.println(k + ":" + v));
+    }
 
     public static void main(String[] args) throws Exception {
 
-        // Connect to queue
-        final String ipAddr = "192.168.1.84";
-        final Connection con = ConnectionFactory.connect(ipAddr);
-        final String channelName = "BBC7";
-        final ReadChannel rc = con.subscribe(channelName);
-
         // Connect to EventStore
         final String clusterID = "test-cluster";
-        final String clientID = "event-writer";
+        final String clientID = "event-reader";
         final StreamingConnectionFactory cf = new StreamingConnectionFactory(clusterID, clientID);
         final StreamingConnection sc = cf.createConnection();
 
-        // TODO - write the events into the event store
+        // Subscribe to the store for events
+        final String subject = "BBC7";
 
-        // Hints ...
+        // you may want to remove count down latch for the stream.
+        final CountDownLatch doneLatch = new CountDownLatch(1);
+        final SubscriptionOptions opts = new SubscriptionOptions.Builder().deliverAllAvailable().build();
+        sc.subscribe(subject, evt -> {
+            System.out.println(evt);
+            doneLatch.countDown();
+        } , opts);
 
-        // to read an item from the queue
-        final String event = (String) rc.read();
-
-        // to write an item to the event store
-        sc.publish(channelName, event.getBytes());
+        doneLatch.await();
+        sc.close();
 	}
+
+
+
 
 
 }
