@@ -15,7 +15,7 @@ object EventReader {
   private[events] def register(logLine: String, document: Map[String, Int]): Unit = {
     targets.foreach((target: String) => {
       if (logLine.contains(target))
-        document.compute(target, (k, v) => if (v == null) 1 else v + 1)
+        document.compute(target, (k, v) => if (v.equals(null)) 1 else v + 1)
     })
   }
 
@@ -49,9 +49,7 @@ object EventReader {
     sc.close
   }
 
-
   import scala.collection.JavaConverters._
-
 
   private[events] def formatDoc(document: Map[String, Int]): Unit = {
 
