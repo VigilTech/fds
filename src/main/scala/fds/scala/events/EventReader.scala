@@ -9,8 +9,8 @@ import io.nats.streaming.{Message, StreamingConnection, StreamingConnectionFacto
 
 object EventReader {
 
-  private[events] val targets =
-    Set("AdultSki", "WinterActivities", "DanielBaudSkiGuide")
+  private[events] val targets  =
+    "AdultSki" :: "WinterActivities" :: "DanielBaudSkiGuide" :: Nil
 
   private[events] def register(logLine: String, document: Map[String, Int]): Unit = {
     targets.foreach((target: String) => {
@@ -54,13 +54,14 @@ object EventReader {
 
 
   private[events] def formatDoc(document: Map[String, Int]): Unit = {
+
     cout("--------------------------------------------------------------------------------")
     cout("| Giant Media - Usage Report                                                   |")
     cout("--------------------------------------------------------------------------------")
-    document.forEach((k, v) => System.out.println(String.format("| %-49s|%26d |", k, v)))
+    document.forEach((k, v) => System.out.println(String.format("| %-49s|%26d |", k, new Integer(v))))
     cout("--------------------------------------------------------------------------------")
     val views: Iterable[Int] = document.values.asScala
-    cout(String.format("| %-49s|%26d |", "Total Views", document.values.asScala.sum))
+    cout(String.format("| %-49s|%26d |", "Total Views", new Integer(document.values.asScala.sum)))
     cout("--------------------------------------------------------------------------------")
   }
 
