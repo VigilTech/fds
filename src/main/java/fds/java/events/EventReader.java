@@ -14,9 +14,7 @@ import java.util.stream.Stream;
  */
 public class EventReader {
 
-
-
-    final static Set<String> targets= new HashSet<String>(
+    final static Set<String> targets= new HashSet<>(
                                 Arrays.asList(  "AdultSki",
                                                 "WinterActivities",
                                                 "DanielBaudSkiGuide")
@@ -34,43 +32,29 @@ public class EventReader {
 
         final Map<String,Integer> document = new HashMap<>();
 
-        register("AdultSki", document);
-        register("AdultSki", document);
-        register("AdultSki", document);
+        // Connect to EventStore
+        final String clusterID = "test-cluster";
+        final String clientID = "event-reader";
+        final StreamingConnectionFactory cf = new StreamingConnectionFactory(clusterID, clientID);
+        final StreamingConnection sc = cf.createConnection();
 
-        register("WinterActivities", document);
-        register("WinterActivities", document);
-        register("WinterActivities", document);
+        // Subscribe to the store for events
+        final String subject = "BBC7";
 
-        register("DanielBaudSkiGuide", document);
+        // you may want to remove count down latch for the stream.
+        final CountDownLatch doneLatch = new CountDownLatch(1);
+        final SubscriptionOptions opts = new SubscriptionOptions.Builder().deliverAllAvailable().build();
+        sc.subscribe(subject, evt -> {
+            System.out.println(evt);
+            doneLatch.countDown();
+        } , opts);
 
-        formatDoc(document);
-
-
-//        // Connect to EventStore
-//        final String clusterID = "test-cluster";
-//        final String clientID = "event-reader";
-//        final StreamingConnectionFactory cf = new StreamingConnectionFactory(clusterID, clientID);
-//        final StreamingConnection sc = cf.createConnection();
-//
-//        // Subscribe to the store for events
-//        final String subject = "BBC7";
-//
-//        // you may want to remove count down latch for the stream.
-//        final CountDownLatch doneLatch = new CountDownLatch(1);
-//        final SubscriptionOptions opts = new SubscriptionOptions.Builder().deliverAllAvailable().build();
-//        sc.subscribe(subject, evt -> {
-//            System.out.println(evt);
-//            doneLatch.countDown();
-//        } , opts);
-//
-//        doneLatch.await();
-//        sc.close();
+        doneLatch.await();
+        sc.close();
 	}
 
 
     final static void formatDoc(final Map<String,Integer> document ) {
-
         cout("--------------------------------------------------------------------------------");
         cout("| Giant Media - Usage Report                                                   |");
         cout("--------------------------------------------------------------------------------");
