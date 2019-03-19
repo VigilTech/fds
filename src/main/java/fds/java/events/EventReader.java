@@ -65,7 +65,6 @@ public class EventReader {
         cout("--------------------------------------------------------------------------------");
     }
 
-
     final static void cout(final String str) {
         System.out.println(str);
     }
