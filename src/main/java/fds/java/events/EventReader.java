@@ -4,8 +4,14 @@ import io.nats.streaming.StreamingConnection;
 import io.nats.streaming.StreamingConnectionFactory;
 import io.nats.streaming.SubscriptionOptions;
 
+import java.io.IOException;
+
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
@@ -54,19 +60,29 @@ public class EventReader {
 	}
 
 
-    final static void formatDoc(final Map<String,Integer> document ) {
-        cout("--------------------------------------------------------------------------------");
-        cout("| Giant Media - Usage Report                                                   |");
-        cout("--------------------------------------------------------------------------------");
-        document.forEach( (k,v) -> System.out.println(String.format("| %-49s|%26d |",k,v)) );
-        cout("--------------------------------------------------------------------------------");
+	// Format a map into a report
+    final static String formatDoc(final Map<String,Integer> document ) {
+        List<String> rep = new ArrayList<>();
+        rep.add("--------------------------------------------------------------------------------");
+        rep.add("| Giant Media - Usage Report                                                   |");
+        rep.add("--------------------------------------------------------------------------------");
+        document.forEach( (k,v) -> rep.add(String.format("| %-49s|%26d |",k,v)));
+        rep.add("--------------------------------------------------------------------------------");
         final Stream<Integer> views = document.values().stream();
-        cout(String.format("| %-49s|%26d |","Total Views", views.reduce(0, Integer::sum)));
-        cout("--------------------------------------------------------------------------------");
+        rep.add(String.format("| %-49s|%26d |","Total Views", views.reduce(0, Integer::sum)));
+        rep.add("--------------------------------------------------------------------------------");
+        return rep.stream().collect(Collectors.joining("\n"));
     }
 
-    final static void cout(final String str) {
-        System.out.println(str);
+
+    // Write a String into a named file
+    final static void writeToFile(final String filename, final String content) throws IOException {
+        Files.write(Paths.get(filename), content.getBytes(StandardCharsets.UTF_8));
+    }
+
+    // Read a String from a named file
+    final static String readFromFile(final String filename) throws IOException {
+        return new String(Files.readAllBytes(Paths.get(filename)),StandardCharsets.UTF_8);
     }
 
 
