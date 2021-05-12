@@ -35,12 +35,13 @@ object EventReader {
     val sc: StreamingConnection = cf.createConnection
 
     // Subscribe to the store for events
-    val subject: String = "BBC7"
+    val subject: String = "log-events"
     // you may want to remove count down latch for the stream.
     val doneLatch: CountDownLatch = new CountDownLatch(1)
 
-    //  Many subscribe options @see https://nats.io/documentation/writing_applications/subscribing/
     val opts: SubscriptionOptions = new SubscriptionOptions.Builder().deliverAllAvailable.build
+    // Many subscribe options @see https://nats.io/documentation/writing_applications/subscribing/
+    // e.g. val alt: SubscriptionOptions = new SubscriptionOptions.Builder().startAtSequence(27).build
 
     sc.subscribe(subject, (evt: Message) => {
       System.out.println(evt)

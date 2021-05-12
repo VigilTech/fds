@@ -1,29 +1,21 @@
 package fds.scala.queue
 
 
+import io.nats.client.Connection
+import io.nats.client.Nats
+import java.nio.charset.StandardCharsets
 
-import com.zink.queue.{WriteChannel, ConnectionFactory, Connection}
 
 /**
   * Producer stub
   *
-  * From Fly Docker
-  *
-  * > docker run -d -p 4396:4396 zink/fly
-  *
-  * To find container <run time name>
-  * > docker ps
-  *
-  * To find ipAddress
-  * > docker inspect <run time name> | grep -i ipaddress
-  *
   */
 object Producer extends App {
 
-  val con : Connection = ConnectionFactory.connect("172.17.0.2")
-  val wc : WriteChannel = con.publish("BBC7")
+  val nc: Connection  = Nats.connect("nats://localhost:4222")
 
-  wc.write("Hello Consumer")
+  // Write a start of stream marker
+  nc.publish("logs", "Starting Streaming".getBytes(StandardCharsets.UTF_8))
 
   val fileName = "access.log"
   val logLines = scala.io.Source.fromFile(fileName).getLines
@@ -32,6 +24,7 @@ object Producer extends App {
   for (line <- logLines) {
       // ...
   }
+
   // TODO write an end of stream marker
 
 }
